@@ -1,0 +1,17 @@
+#Known legitimate senders for a network
+known_legitimate_senders=known_legitimate_senders
+
+#Processed blacklist data
+processed_ips_files=blacklist_ips
+
+#Constant L for exponential decay
+l=30
+
+#Constant K for recommendation system
+K=5
+
+#Write BLAG results folder
+results_folder=blag_ips
+
+#Avoid blacklists
+avoid_blacklists=
