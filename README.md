@@ -19,7 +19,7 @@ blacklist_folder:
       date.zip
 ```
 
-This is the format that we maintain our blacklist dataset at https://steel.isi.edu/members/sivaram/BLAG/. A sample folder is present in this repository named blacklists.
+This is the format that we maintain our blacklist dataset at https://steel.isi.edu/projects/BLAG/data/. A sample folder is present in this repository named blacklists.
 
 To run generate this file, run:
 
