@@ -1,37 +1,32 @@
 # BLAG: Improving the Accuracy of Blacklists
-This repository consists of necessary scripts to run BLAG. 
+This repository consists of necessary scripts to run BLAG. Please refer our [paper](https://steel.isi.edu/members/sivaram/papers/BLAG_NDSS.pdf) for more explanation.
 
 ![BLAG pipeline](figs/blag_pipeline_8.png)
 
 ## Requirements
 `pip install surprise pandas`
 
-[Surprise](http://surpriselib.com/) is a Python package for running recommendation systems. 
+[Surprise](http://surpriselib.com/) is a Python package for running recommendation systems.
 
-## BLAG Configuration
-The config file stores the value for different parameters used in BLAG. Please refer our [paper](https://steel.isi.edu/members/sivaram/papers/BLAG_NDSS.pdf) for more explanation.
+## Processing blacklists
+To obtain the recommended scores for IP addresses in blacklists, there is a preprocessing step that generates
+a file known as `processed_blacklists`. Ensure that blacklists are downloaded to a folder containing the heirarchy as shown below:
+
+`blacklist_folder:
+  year:
+    month:
+      date.zip`
+
+This is the format that we maintain our blacklist dataset at https://steel.isi.edu/members/sivaram/BLAG/. A sample folder is present in this repository named blacklists.
+
+To run generate this file, run:
+
+`python process_blacklists.py --start_date "" --end_date "" --blacklist_folder ""`
 
 
-`known_legitimate_senders=known_legitimate_senders`
+## Processing blacklists
+After generating the processed_blacklists file, you can generate recommended scores as follows:
 
-Known legitimate senders for a network. Used to curate the misclassification blacklist.
+`python blag.py --end_date "" --misclassifications "" --output_file ""`
 
-`processed_ips_files=blacklist_ips`
-
-Processed blacklist data. Source of Blacklist data
-
-`l=30`
-
-Constant L for exponential decay. L ensures recently listed blacklisted addresses are allocated a high relevance score compared to addresses that were listed way back in the past.
-
-`K=5`
-
-Constant K for recommendation system. K determines the number of latent features that contribute to an address to be listed in a blacklist
-
-`results_folder=blag_ips`
-
-Write BLAG results folder
-
-`avoid_blacklists=`
-
-Avoid blacklists
+where misclassifications consists of the file with known misclassifications. A sample misclassifications file is provided in this repository named false_positives.
